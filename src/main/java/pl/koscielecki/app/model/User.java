@@ -21,6 +21,8 @@ public class User {
     @NotBlank
     private String surname;
 
+    private String email;
+
     @NotBlank
     private String password;
 
@@ -36,7 +38,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     private List<Donation> donations = new ArrayList<>();
 
-    public User(String name,String surname,String password) {
+    public User() {
+    }
+
+    public User(String name, String surname, String password) {
         this.name = name;
         this.surname = surname;
         this.password = password;
@@ -88,5 +93,29 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<Donation> getDonations() {
+        return donations;
+    }
+
+    public void setDonations(List<Donation> donations) {
+        this.donations = donations;
     }
 }
