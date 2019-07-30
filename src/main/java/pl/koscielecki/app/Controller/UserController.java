@@ -2,14 +2,26 @@ package pl.koscielecki.app.Controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import pl.koscielecki.app.Repository.UserRepository;
+import pl.koscielecki.app.Security.CurrentUser;
 import pl.koscielecki.app.Service.UserService;
+import pl.koscielecki.app.Validation.RegisterValidator;
+import pl.koscielecki.app.model.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(path = "/users")
+@SessionAttributes({"currentUser"})
 public class UserController {
 
     @Autowired
@@ -17,9 +29,34 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+
+
+    @GetMapping(value = "/add")
+    public String addUser(Model model){
+        model.addAttribute("user",new User());
+        return "register";
+    }
+    @PostMapping("/add")
+    public String add(@Valid User user, BindingResult result, @AuthenticationPrincipal CurrentUser currentUser, HttpServletRequest request){
+        User userExist = userRepository.findByEmail(user.getEmail());
+
+        new RegisterValidator().validateEmailExist(userExist, result);
+
+        new RegisterValidator().validate(user, result);
+
+        if (result.hasErrors()) {
+            return "register";
+
+        }else{
+
+            userService.saveUser(user);
+
+        }
+        return "login";
+    }
     @RequestMapping("/all")
     public String allUsers(Model model){
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", userService.findAll());
         return "user/list";
     }
 }
