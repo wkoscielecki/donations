@@ -6,10 +6,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import pl.koscielecki.app.Repository.UserRepository;
 import pl.koscielecki.app.Security.CurrentUser;
 import pl.koscielecki.app.Service.UserService;
@@ -18,6 +15,7 @@ import pl.koscielecki.app.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(path = "/users")
@@ -58,5 +56,15 @@ public class UserController {
     public String allUsers(Model model){
         model.addAttribute("users", userService.findAll());
         return "user/list";
+    }
+//    @RequestMapping("/edit/{id}")
+//    public String editUser(@PathVariable (name = "id") Long id){
+//
+//    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteUser(@PathVariable (name = "id") Long id){
+        userService.delete(id);
+        return "redirect: user/list";
     }
 }

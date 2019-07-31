@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Step 1</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+<body>
+<header class="header--form-page" th:include="donations/fragments::header"></header>
+<section class="form--steps">
+    <div class="form--steps-instructions">
+        <div class="form--steps-container">
+            <h3>Ważne!</h3>
+            <p data-step="1" class="active">
+                Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy
+                wiedzieć komu najlepiej je przekazać.
+            </p>
+        </div>
+
+
+    <div class="form--steps-container">
+        <div class="form--steps-counter">Krok <span>1</span>/5</div>
+    </div>
+
+
+<form>
+    <!-- STEP 1: class .active is switching steps -->
+    <div data-step="1" class="active">
+        <h3>Zaznacz co chcesz oddać:</h3>
+
+        <div class="form-group form-group--checkbox">
+            <label>
+                <input
+                        type="checkbox"
+                        name="products[]"
+                        value="clothes-to-use"
+                />
+                <span class="checkbox"></span>
+                <span class="description"
+                >ubrania, które nadają się do ponownego użycia</span
+                >
+            </label>
+        </div>
+
+        <div class="form-group form-group--checkbox">
+            <label>
+                <input
+                        type="checkbox"
+                        name="products[]"
+                        value="clothes-useless"
+                />
+                <span class="checkbox"></span>
+                <span class="description">ubrania, do wyrzucenia</span>
+            </label>
+        </div>
+
+        <div class="form-group form-group--checkbox">
+            <label>
+                <input type="checkbox" name="products[]" value="toys" />
+                <span class="checkbox"></span>
+                <span class="description">zabawki</span>
+            </label>
+        </div>
+
+        <div class="form-group form-group--checkbox">
+            <label>
+                <input type="checkbox" name="products[]" value="books" />
+                <span class="checkbox"></span>
+                <span class="description">książki</span>
+            </label>
+        </div>
+
+        <div class="form-group form-group--checkbox">
+            <label>
+                <input type="checkbox" name="products[]" value="other" />
+                <span class="checkbox"></span>
+                <span class="description">inne</span>
+            </label>
+        </div>
+
+        <div class="form-group form-group--buttons">
+            <button type="button" class="btn next-step">Dalej</button>
+        </div>
+    </div>
+
+</form>
+    </div>
+</section>
+<footer th:include="donations/fragments::footerPart"></footer>
+<script src="../static/js/app.js"></script>
+
+</body>
+</html>

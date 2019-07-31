@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
   </head>
   <body>
     <header class="header--form-page">
@@ -23,7 +25,7 @@
         </ul>
 
         <ul>
-          <li><a href="#" class="btn btn--without-border active">Start</a></li>
+          <li><a href="/" class="btn btn--without-border active">Start</a></li>
           <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
           <li><a href="#" class="btn btn--without-border">O nas</a></li>
           <li>
@@ -390,6 +392,7 @@
     </section>
 
     <footer>
+      <div th:fragment="footerPart">
       <div class="contact">
         <h2>Skontaktuj się z nami</h2>
         <h3>Formularz kontaktowy</h3>
@@ -416,15 +419,16 @@
         <span class="bottom-line--copy">Copyright &copy; 2018</span>
         <div class="bottom-line--icons">
           <a href="#" class="btn btn--small"
-            ><img src="images/icon-facebook.svg"
+            ><img src="../static/images/icon-facebook.svg"
           /></a>
           <a href="#" class="btn btn--small"
-            ><img src="images/icon-instagram.svg"
+            ><img src="../static/images/icon-instagram.svg"
           /></a>
         </div>
       </div>
+    </div>
     </footer>
 
-    <script src="js/app.js"></script>
+    <script src="../static/js/app.js"></script>
   </body>
 </html>
