@@ -3,7 +3,7 @@ package pl.koscielecki.app.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "cites")
+@Table(name = "cities")
 public class City {
 
     @Id
