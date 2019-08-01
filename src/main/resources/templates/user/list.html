@@ -2,13 +2,20 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Lista użytkowników</title>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
-<div align="center">
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <a href="/users/add" class="btn btn-primary">Add User</a>
+        </div>
+
+    </div>
     <h1>USERS</h1>
-    <table border="1">
+    <table class="table table-hover" >
         <thead>
         <tr>
             <th>User Id</th>
@@ -25,7 +32,11 @@
             <td th:text="${user.name}">Name</td>
             <td th:text="${user.surname}">Last Name</td>
             <td th:text="${user.email}">Email</td>
-            <td> <a th:href="@{'/delete/' + ${user.id}}">Delete</a></td>
+            <td>
+                <a href="/users/edit/" th:href="@{|/users/edit/${user.id}|}"class="btn btn-success">Edit</a>
+                <a href="/users/delete/" th:href="@{|/users/delete/${user.id}|}"class="btn btn-danger">Delete</a>
+
+            </td>
         </tr>
         </tbody>
     </table>

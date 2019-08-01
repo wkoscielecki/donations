@@ -42,7 +42,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User get(Long id){
+    public User findById(Long id){
         return userRepository.findById(id).get();
     }
     public void delete(Long id){

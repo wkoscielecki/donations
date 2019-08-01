@@ -3,19 +3,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>City List</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
 
 </head>
 <body>
 
-<section>
-<div align="center">
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <a href="/addCity" class="btn btn-primary">Add City</a>
+        </div>
+
+    </div>
     <h1>CITIES</h1>
-    <table border="1">
+    <table class="table table-hover" >
         <thead>
         <tr>
             <th>City Id</th>
@@ -26,18 +31,20 @@
         </thead>
         <tbody>
         <tr th:each="city : ${cities}" >
-            <td th:text="${city.id}">User Id</td>
+            <td th:text="${city.id}">City Id</td>
             <td th:text="${city.name}">Name</td>
-            <td> <a th:href="@{'/editCity/' + ${city.id}}">Edit</a>
-             <a th:href="@{'/deleteCity/' + ${city.id}}">Delete</a>
+            <td>
+                <a href="/editCity" th:href="@{|/editCity/${city.id}|}"class="btn btn-success">Edit</a>
+                <a href="/deleteCity/" th:href="@{|/deleteCity/${city.id}|}"class="btn btn-danger">Delete</a>
+
             </td>
         </tr>
         </tbody>
     </table>
 
 </div>
+
+
 </section>
-
-
 </body>
 </html>

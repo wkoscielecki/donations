@@ -57,10 +57,19 @@ public class UserController {
         model.addAttribute("users", userService.findAll());
         return "user/list";
     }
-//    @RequestMapping("/edit/{id}")
-//    public String editUser(@PathVariable (name = "id") Long id){
-//
-//    }
+    @GetMapping("edit/{id}")
+    public String editUser(@PathVariable Long id, Model model){
+        model.addAttribute("user", userService.findById(id));
+        return "user/edit";
+    }
+    @PostMapping("/edit")
+    public String editUser(@Valid User user, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "user/edit";
+        }
+        userService.saveUser(user);
+        return "redirect:/all";
+    }
 
     @RequestMapping("/delete/{id}")
     public String deleteUser(@PathVariable (name = "id") Long id){
