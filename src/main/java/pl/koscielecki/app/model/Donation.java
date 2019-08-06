@@ -22,6 +22,8 @@ public class Donation {
     @ManyToMany
     private List<Items> items=new ArrayList<>();
 
+    private int quantity;
+
     @ManyToOne
     private TrustedInstitutions trustedInstitutions;
 
@@ -170,5 +172,13 @@ public class Donation {
 
     public void setCreationTime(LocalDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

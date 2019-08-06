@@ -1,11 +1,17 @@
 package pl.koscielecki.app.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.koscielecki.app.Service.DonationService;
 
 @Controller
 public class DonationController {
+
+    @Autowired
+    DonationService donationService;
 
     @RequestMapping("/form")
     public String form(){
@@ -40,5 +46,11 @@ public class DonationController {
     @RequestMapping("/step7")
     public String step7(){
         return "donations/step7";
+    }
+
+    @RequestMapping("/allDonations")
+    public String all(Model model){
+        model.addAttribute("donations",donationService.findAll());
+        return "donations/list";
     }
 }

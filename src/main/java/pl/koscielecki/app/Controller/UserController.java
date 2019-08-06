@@ -52,6 +52,29 @@ public class UserController {
         }
         return "login";
     }
+    @GetMapping("/add-admin")
+    public String addAdmin(Model model){
+        model.addAttribute("admin",new User());
+        return "register";
+    }
+    @PostMapping("/add-admin")
+    public String saveAdmin(@Valid User user, BindingResult result, @AuthenticationPrincipal CurrentUser currentUser, HttpServletRequest request){
+        User userExist = userRepository.findByEmail(user.getEmail());
+
+        new RegisterValidator().validateEmailExist(userExist, result);
+
+        new RegisterValidator().validate(user, result);
+
+        if (result.hasErrors()) {
+            return "register";
+
+        }else{
+
+            userService.saveAdmin(user);
+
+        }
+        return "login";
+    }
     @RequestMapping("/all")
     public String allUsers(Model model){
         model.addAttribute("users", userService.findAll());
